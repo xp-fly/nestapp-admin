@@ -1,5 +1,5 @@
 import { Column, Entity } from 'typeorm';
-import { BaseAbstractEntity } from 'src/entity/base.abstract.entity';
+import { BaseAbstractEntity } from '../base/base.abstract.entity';
 
 @Entity({
     name: 'user_group'

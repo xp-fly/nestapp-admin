@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
+import { Body, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { UserGroupService } from '../service/user-group.service';
 import { AddUserGroupDto } from '../dto/user-group/add-user-group.dto';
 import { UpdateUserGroupDto } from '../dto/user-group/update-user-group.dto';
+import { Controller } from '../decorator/controller.decorator';
 
 @Controller('userGroup')
 export class UserGroupController {

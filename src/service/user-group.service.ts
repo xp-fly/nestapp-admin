@@ -1,7 +1,7 @@
 import { BadRequestException, HttpException, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { UserGroup } from '../entity/user-group.entity';
-import { getOffsetLimit } from '../../../../src/util/limit-offset';
+// import { getOffsetLimit } from '../../../../src/util/limit-offset';
 import { AddUserGroupDto } from '../dto/user-group/add-user-group.dto';
 import * as uuid from 'uuid';
 import { UpdateUserGroupDto } from '../dto/user-group/update-user-group.dto';
@@ -20,11 +20,11 @@ export class UserGroupService {
      * @param param
      */
     getList(param) {
-        const { offset, limit } = getOffsetLimit(param);
+        // const { offset, limit } = getOffsetLimit(param);
 
         return this.userGroupRepo.findAndCount({
-            take: limit,
-            skip: offset
+            take: 0,
+            skip: 10
         });
     }
 

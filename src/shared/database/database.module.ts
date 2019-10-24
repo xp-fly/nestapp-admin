@@ -1,5 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { ConfigService } from 'nestjs-configure';
+import { ConfigModule, ConfigService } from 'nestjs-configure';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as path from 'path';
 import { Repository } from 'typeorm';
@@ -29,7 +29,7 @@ export class DatabaseModule {
                             entities: [
                                 entitiesPath,
                             ],
-                            synchronize: true,
+                            synchronize: false,
                             logging: true,
                         };
                     },
@@ -37,5 +37,9 @@ export class DatabaseModule {
                 }),
             ]
         };
+    }
+
+    static forFeature(entities: Function[], connection: string) {
+        return TypeOrmModule.forFeature(entities, connection);
     }
 }

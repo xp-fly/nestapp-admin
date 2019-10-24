@@ -1,7 +1,7 @@
-import { Column } from 'typeorm';
-import { BaseAbstractEntity } from '../../../../src/entity/base.abstract.entity';
+import { Column, Entity } from 'typeorm';
+import { BaseAbstractEntity } from '../base/base.abstract.entity';
 
-@Column({
+@Entity({
     name: 'user'
 })
 export class User extends BaseAbstractEntity {
