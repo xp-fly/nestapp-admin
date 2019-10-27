@@ -17,7 +17,7 @@ export class DatabaseModule {
                 TypeOrmModule.forRootAsync({
                     useFactory: (configService: ConfigService) => {
                         const dataSource = (configService.get(configName) || {}).dataSource;
-                        const entitiesPath = path.resolve(__dirname, '../../**/**.entity{.ts,.js}');
+                        const entitiesPath = path.resolve(__dirname, '../../**/**.entity.{.ts,.js}');
                         return {
                             type: 'mysql',
                             name: dataSource.database,

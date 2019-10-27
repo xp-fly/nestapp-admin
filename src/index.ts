@@ -13,13 +13,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         ConfigModule.load(resolve(__dirname, 'bootstrap.yml'), 'admin'),
         // 数据库模块
         DatabaseModule.init('admin'),
-        TypeOrmModule.forFeature([UserRepository], 'test')
+        TypeOrmModule.forFeature([UserRepository])
     ],
     controllers: [
-        UserController
+        // UserController
     ],
     providers: [
-        UserService
+        // UserService
     ]
 })
 export default class AdminModule {

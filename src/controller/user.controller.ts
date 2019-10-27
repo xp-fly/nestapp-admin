@@ -3,6 +3,7 @@ import { UserService } from '../service/user.service';
 import { AddUserDto } from '../dto/user/add-user.dto';
 import { UpdateUserDto } from '../dto/user/update-user.dto';
 import { Controller } from '../decorator/controller.decorator';
+import { getConnection } from 'typeorm';
 
 @Controller('user')
 export class UserController {
@@ -12,7 +13,9 @@ export class UserController {
     }
 
     @Get()
-    getList() {
+    async getList() {
+        const connectes = await getConnection('test');
+        console.log(connectes);
         return [];
     }
 
