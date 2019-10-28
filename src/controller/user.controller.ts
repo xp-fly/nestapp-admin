@@ -14,9 +14,7 @@ export class UserController {
 
     @Get()
     async getList() {
-        const connectes = await getConnection('test');
-        console.log(connectes);
-        return [];
+        return this.userService.getList()
     }
 
     @Post()

@@ -4,3 +4,4 @@ dataSource:
   username: 'root'
   password: '123456'
   database: 'test'
+  logging: false

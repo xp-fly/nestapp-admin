@@ -1,7 +1,6 @@
 import {Controller as NestController} from '@nestjs/common'
-
-const prefix = 'admin';
+import { apiPrefix } from '../constant';
 
 export function Controller(path: string) {
-    return NestController(`${prefix}/${path}`);
+    return NestController(`${apiPrefix}/${path}`);
 }

@@ -1,5 +1,5 @@
 import { Column, Entity } from 'typeorm';
-import { BaseAbstractEntity } from '../base/base.abstract.entity';
+import { BaseAbstractEntity } from 'nestapp';
 
 @Entity({
     name: 'user'
