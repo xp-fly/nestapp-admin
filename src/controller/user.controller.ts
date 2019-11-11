@@ -3,7 +3,6 @@ import { UserService } from '../service/user.service';
 import { AddUserDto } from '../dto/user/add-user.dto';
 import { UpdateUserDto } from '../dto/user/update-user.dto';
 import { Controller } from '../decorator/controller.decorator';
-import { getConnection } from 'typeorm';
 
 @Controller('user')
 export class UserController {
@@ -14,7 +13,7 @@ export class UserController {
 
     @Get()
     async getList() {
-        return this.userService.getList()
+        return this.userService.getList();
     }
 
     @Post()
@@ -24,6 +23,6 @@ export class UserController {
 
     @Put()
     update(@Body() body: UpdateUserDto) {
-        // return this.userService.update();
+        return this.userService.update(body.id, body);
     }
 }

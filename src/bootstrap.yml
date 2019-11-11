@@ -4,4 +4,7 @@ dataSource:
   username: 'root'
   password: '123456'
   database: 'test'
-  logging: false
+  logging: true
+grpc:
+  - package: 'admin_module'
+    url: '127.0.0.1'

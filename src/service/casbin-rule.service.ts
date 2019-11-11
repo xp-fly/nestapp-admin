@@ -2,11 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { CasbinRule } from '../entity/casbin-rule.entity';
 import { PrivilegeResource } from '../entity/privilege.entity';
+import { InjectRepository } from '../decorator/database.decorator';
+import { CasbinRuleRepository } from '../repository/casbin-rule.repository';
 
 @Injectable()
 export class CasbinRuleService {
     constructor(
-        private casbinRuleRepo: Repository<CasbinRule>
+        @InjectRepository(CasbinRuleRepository)
+        private casbinRuleRepo: CasbinRuleRepository
     ) {
     }
 
@@ -29,7 +32,8 @@ export class CasbinRuleService {
         await this.casbinRuleRepo.delete({
             v1: subId
         });
-
-        await this.casbinRuleRepo.insert(poicies);
+        if (poicies.length) {
+            await this.casbinRuleRepo.insert(poicies);
+        }
     }
 }

@@ -1,17 +1,18 @@
-import { BadRequestException, HttpException, Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
-import { UserGroup } from '../entity/user-group.entity';
-// import { getOffsetLimit } from '../../../../src/util/limit-offset';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { AddUserGroupDto } from '../dto/user-group/add-user-group.dto';
 import * as uuid from 'uuid';
 import { UpdateUserGroupDto } from '../dto/user-group/update-user-group.dto';
 import { CasbinRuleService } from './casbin-rule.service';
+import {getOffsetLimit} from 'nestapp';
+import { InjectRepository } from '../decorator/database.decorator';
+import { UserGroupRepository } from '../repository/user-group.repository';
 
 @Injectable()
 export class UserGroupService {
     constructor(
-        private userGroupRepo: Repository<UserGroup>,
-        private casbinRuleService: CasbinRuleService
+        @InjectRepository(UserGroupRepository)
+        private userGroupRepo: UserGroupRepository,
+        private casbinRuleService: CasbinRuleService,
     ) {
     }
 
@@ -20,11 +21,11 @@ export class UserGroupService {
      * @param param
      */
     getList(param) {
-        // const { offset, limit } = getOffsetLimit(param);
+        const { offset, limit } = getOffsetLimit(param);
 
         return this.userGroupRepo.findAndCount({
-            take: 0,
-            skip: 10
+            take: limit,
+            skip: offset,
         });
     }
 
@@ -34,7 +35,7 @@ export class UserGroupService {
      */
     async add(body: AddUserGroupDto) {
         const userGroup = this.userGroupRepo.create(body);
-        const find = await this.findByName(name);
+        const find = await this.findByName(body.name);
         if (find) {
             throw new BadRequestException('用户组名称不能重复');
         }
@@ -73,5 +74,13 @@ export class UserGroupService {
                 name
             }
         });
+    }
+
+    /**
+     * 删除用户组
+     * @param id
+     */
+    delete(id: number) {
+        return this.userGroupRepo.delete(id);
     }
 }
