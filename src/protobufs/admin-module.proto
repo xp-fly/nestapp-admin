@@ -1,3 +1,6 @@
 syntax = "proto3";
 
 package admin_module;
+
+service AdminService {
+}

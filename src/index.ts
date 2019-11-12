@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { UserController } from './controller/user.controller';
 import { UserService } from './service/user.service';
-import { ConfigModule, ConfigService } from 'nestjs-configure';
+import { ConfigModule } from 'nestjs-configure';
 import { resolve } from 'path';
 import { UserRepository } from './repository/user.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -23,7 +23,7 @@ import { ProtobufLoader } from './protobufs/protobuf-loader';
         DatabaseModule.init({
             configName,
             connectName: databaseConnectName,
-            entitiesPath: resolve(__dirname, './**/**.entity{.ts,.js}')
+            entitiesPath: resolve(__dirname, './**/**.entity{.ts,.js}'),
         }),
         // grpc 模块
         GrpcModule.init({
